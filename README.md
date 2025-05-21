@@ -1,1 +1,2 @@
-# github-activity-bot
+# GitHub Activity Bot
+Автоматическая активность каждый день ✅
