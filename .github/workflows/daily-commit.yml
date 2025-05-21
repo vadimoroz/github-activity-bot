@@ -1,0 +1,26 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # каждый день в 6:00 утра по UTC
+  workflow_dispatch: # позволяет вручную запускать
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Make a change to README.md
+        run: |
+          echo "✅ Автообновление: $(date)" >> README.md
+
+      - name: Commit and Push
+        run: |
+          git config user.name "vadimoroz-bot"
+          git config user.email "vadimoroz41261@gmail.com"
+          git add README.md
+          git commit -m "🤖 Автообновление: $(date)"
+          git push
