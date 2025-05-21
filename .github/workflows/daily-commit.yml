@@ -1,9 +1,13 @@
 name: Daily Commit
 
+# 👇 ЭТО ВАЖНО: даёт права на push от GitHub Actions
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '0 6 * * *'  # каждый день в 06:00 UTC
-  workflow_dispatch:     # запуск вручную
+  workflow_dispatch:
 
 jobs:
   commit:
@@ -19,7 +23,7 @@ jobs:
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "vadimoroz41261@gmail.com"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "📌 Автообновление: $(date -u)" || echo "No changes to commit"
           git push
